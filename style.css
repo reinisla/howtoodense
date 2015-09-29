@@ -1,0 +1,57 @@
+body {
+  width: 100%;
+  padding:0;
+  margin:0;
+  background-color: #F2FFE3;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+#container{
+  max-width: 960px;
+  margin: 0 auto; 
+  
+}
+
+nav {
+  width: 100%;
+}
+
+
+nav ul {
+  list-style: none;
+  overflow: hidden; 
+  margin:0px;
+  padding:0px;
+}
+
+nav ul li {
+  float: left;
+  width: 20%; 
+
+}
+
+nav ul li a {
+  text-align: center;
+  padding: 8px 0;
+  display: block;
+  width: 100%;
+}
+
+nav ul li a,
+nav ul li a:focus,
+nav ul li a:hover,
+nav ul li a:active {
+
+text-decoration: none; 
+}
+
+nav ul li a:hover,
+nav ul li a:active {
+opacity: 0.8;
+}
+
+#content{
+ padding-bottom:20px;
+
+}
