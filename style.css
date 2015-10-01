@@ -163,6 +163,20 @@ opacity: 0.8;
 #navmenu.align-right li:first-child a:after {
   display: none;
 }
+#navmenu ul ul {
+  display: none;
+  background: #333333;
+  
+
+}
+
+  #navmenu ul li:hover > ul {
+    display: block;
+    width: 20px;
+    position: absolute;
+    
+  }
+
 @media screen and (max-width: 768px) {
   #navmenu ul li {
     float: none;
@@ -185,6 +199,7 @@ opacity: 0.8;
   #navmenu ul li a:before {
     display: none;
   }
+  
 }
 
 #banner {

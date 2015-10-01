@@ -50,25 +50,25 @@
 <div id="feat">
   
   <ul>
-    <div class="figure"><li><a href="#"><img src="img/23.jpg"></a></li><p>
-        <h3>Pub Name</h3>
-        <p>Address: Elmelundsvej 4</p>
+    <div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
+        <h3>Heidis</h3>
+        <p>Address: Vestergade 75</p>
     </p></div>
-<div class="figure"><li><a href="#"><img src="img/23.jpg"></a></li><p>
-        <h3>Pub Name</h3>
+<div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
+        <h3>Australian Bar</h3>
+        <p>Address: Brandts Passage 10</p>
+    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
+        <h3>The Gap</h3>
         <p>Address: Elmelundsvej 4</p>
-    </p></div><div class="figure"><li><a href="#"><img src="img/23.jpg"></a></li><p>
-        <h3>Pub Name</h3>
-        <p>Address: Elmelundsvej 4</p>
-    </p></div><div class="figure"><li><a href="#"><img src="img/23.jpg"></a></li><p>
-        <h3>Pub Name</h3>
-        <p>Address: Elmelundsvej 4</p>
-    </p></div><div class="figure"><li><a href="#"><img src="img/23.jpg"></a></li><p>
-        <h3>Pub Name</h3>
-        <p>Address: Elmelundsvej 4</p>
-    </p></div><div class="figure"><li><a href="#"><img src="img/23.jpg"></a></li><p>
-        <h3>Pub Name</h3>
-        <p>Address: Elmelundsvej 4</p>
+    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
+        <h3>Air Pub</h3>
+        <p>Address: Kongensgade 41</p>
+    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
+        <h3>Old Irish Pub</h3>
+        <p>Address: Vintapperstræde 4</p>
+    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
+        <h3>La Bar</h3>
+        <p>Address: Vintapperstræde 51</p>
     </p></div>
 
 
@@ -186,9 +186,11 @@
                     parseFloat(markers[i].getAttribute("lat")),
                     parseFloat(markers[i].getAttribute("lng")));
                     var html = "<b>" + name + "</b> <br/>" + address;
+                    
                     // var icon = customIcons[type] || {};
                     var marker = createMarker(point, name, address, type, map);
                     bindInfoWindow(marker, map, infoWindow, html);
+                   
                 }
                 // });
             }
@@ -205,7 +207,10 @@
                 if (!markerGroups[type]) markerGroups[type] = [];
                 markerGroups[type].push(marker);
                 var html = "<b>" + name + "</b> <br/>" + address;
+                var web = "http://localhost/howtoodense/"+ type + ".html";
                 bindInfoWindow(marker, map, infoWindow, html);
+                bindInfoWindow2(marker,web);
+                marker.setVisible(false);
                 return marker;
             }
 
@@ -225,6 +230,14 @@
                 google.maps.event.addListener(marker, 'mouseover', function () {
                     infoWindow.setContent(html);
                     infoWindow.open(map, marker);
+
+                });
+                
+                
+            }
+             function bindInfoWindow2(marker,web) {
+                google.maps.event.addListener(marker, 'click', function () {
+                window.location = web;
 
                 });
             }
