@@ -1,0 +1,27 @@
+.box ul {
+    margin: 0;
+    padding: 0;
+}
+
+.box li {
+    cursor: pointer;
+    list-style-type: none;
+    display: inline-block;
+    color: #F0F0F0;
+    text-shadow: 0 0 1px #666666;
+    font-size: 20px;
+}
+
+.box .highlight,
+.box .selected {
+    color: #F4B30A;
+    text-shadow: 0 0 1px #F48F0A;
+}
+#rating {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
