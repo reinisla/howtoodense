@@ -1,5 +1,7 @@
-<!DOCTYPE html>
 <html>
+
+<div class="test"></div>
+
 <head>
     <meta charset="UTF-8">
     <title>How to Odense</title>
@@ -7,104 +9,52 @@
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-</head>
-<body>
-<!--Header-->
-<header id="header" class="alt">
-    <div id='navmenu'>
-        <ul>
-            <li ><a href='index.html'><span>Home</span></a></li>
-           <li ><a href='places.html'><span>Places</span></a></li>
-           <li><a href='index.html'><span>About</span></a></li>
-           <li><a href='index.html'><span>Contact</span></a></li>
-           <li class='last'><a href='index.html'><span>Login</span></a></li>
-        </ul>
-    </div>
-</header>
-<!--Banner-->
-            <section id="mapsbanner">
-            <div id="map"></div>
+    
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+       <script>
+        function highlightStar(obj,id) {
+            removeHighlight(id);        
+            $('#stars-'+id+' li').each(function(index) {
+                $(this).addClass('highlight');
+                if(index == $('#stars-'+id+' li').index(obj)) {
+                    return false;   
+                }
+            });
+        }
 
-            <div id="buttonwrapper" >
-            <ul>
-            <li><button class="mapbutton" type="button"  onclick="toggleGroup('Heidis')  "><img src="img/23.jpg" ><h2>Heidis</h2><h3>20:00 - 02:00</h3></button></li>
-            <li><button class="mapbutton" type="button" onclick="toggleGroup('AustralianBar')" ><img src="img/23.jpg" ><h2>Australian Bar</h2><h3>20:00 - 05:00</h3></button></button></li>
-            <li><button class="mapbutton" type="button"  onclick="toggleGroup('AirPub')" > <img src="img/23.jpg" ><h2>Air Pub</h2><h3>20:00 - 12:00</h3></button></li>
-            <li><button class="mapbutton" type="button"  onclick="toggleGroup('LaBar')" > <img src="img/23.jpg" ><h2>La Bar</h2><h3>20:00 - 06:00</h3></button></li>
-            <li><button class="mapbutton" type="button"  onclick="toggleGroup('OldIrish')" > <img src="img/23.jpg" ><h2>Old Irish Pub</h2><h3>5:00 - 02:00</h3></button></li>
-            <li><button class="mapbutton" type="button"  onclick="toggleGroup('Gap')" > <img src="img/23.jpg" ><h2>The Gap</h2><h3>20:00 - 04:00</h3></button></li>
-          
-            </ul>
-            </div>
+        function removeHighlight(id) {
+            $('#stars-'+id+' > ul > li').removeClass('selected');
+            $('#stars-'+id+' > ul > li').removeClass('highlight');
+        }
 
-            
-            </section>
+        function addRating(obj,id) {
+            $('#stars-'+id+' li').each(function(index) {
+                $(this).addClass('selected');
+                $('#stars-'+id+' #rating').val((index+1));
+                if(index == $('#stars-'+id+' li').index(obj)) {
+                    return false;   
+                }
+            });
+            $.ajax({
+                url: "add_rating.php",
+                data:'id='+id+'&rating='+$('#stars-'+id+' #rating').val(),
+                type: "POST"
+            });
+        }
 
-
-
-
-<!--categories-->
-
-
-
-<div id="feat">
-  
-  <ul>
-    <div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
-        <h3>Heidis</h3>
-        <p>Address: Vestergade 75</p>
-    </p></div>
-<div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
-        <h3>Australian Bar</h3>
-        <p>Address: Brandts Passage 10</p>
-    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
-        <h3>The Gap</h3>
-        <p>Address: Elmelundsvej 4</p>
-    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
-        <h3>Air Pub</h3>
-        <p>Address: Kongensgade 41</p>
-    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
-        <h3>Old Irish Pub</h3>
-        <p>Address: Vintapperstræde 4</p>
-    </p></div><div class="figure"><li><a href="heidis.html"><img src="img/23.jpg"></a></li><p>
-        <h3>La Bar</h3>
-        <p>Address: Vintapperstræde 51</p>
-    </p></div>
-
-
-
-  </ul>
-
-</div>
-
-
-
-<!--see more--> 
-
-<div class="button-wrapper">
-  <a class="button cta-button" href="#">seemore</a>
-</div>
-
-
-
-<!--footer-->
-<footer class="footer">
-
-            <p class="content">Bad decisions make better stories</p>
-
-            <p class="footer-links">
-                <a href="index.html">Places</a>
-                ·
-                <a href="index.html">About</a>
-                ·
-                <a href="index.html">Contact</a>
-                ·
-                <a href="index.html">Login</a>
-            </p>
-            <p class="copy">RBGK &copy; 2015</p>
-        </footer>
-
-<script type="text/javascript">
+        function resetRating(id) {
+            if($('#stars-'+id+' #rating').val() != 0) {
+                $('#stars-'+id+' li').each(function(index) {
+                    $(this).addClass('selected');
+                    console.log($('input#rating').val())
+                    if((index+1) == $('#stars-'+id+' input#rating').val()) {
+                        return false;   
+                    }
+                });
+            }
+        } 
+        </script>
+        <script type="text/javascript">
                 function xmlParse(str) {
                 if (typeof ActiveXObject != 'undefined' && typeof GetObject != 'undefined') {
                     var doc = new ActiveXObject('Microsoft.XMLDOM');
@@ -157,9 +107,11 @@
                     zoom: 14,
                     mapTypeId: 'roadmap',
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
-                  mapTypeControl: false,
-                  streetViewControl: false,
-                  panControl: false,
+                  scrollwheel: false,
+                navigationControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                draggable: true,
                   zoomControlOptions: {
                      position: google.maps.ControlPosition.LEFT_BOTTOM
                   }
@@ -207,7 +159,7 @@
                 if (!markerGroups[type]) markerGroups[type] = [];
                 markerGroups[type].push(marker);
                 var html = "<b>" + name + "</b> <br/>" + address;
-                var web = "http://localhost/howtoodense/"+ type + ".html";
+                var web = "http://mmdprojects.com/howtoodense/"+ type + ".html";
                 bindInfoWindow(marker, map, infoWindow, html);
                 bindInfoWindow2(marker,web);
                 marker.setVisible(false);
@@ -259,7 +211,126 @@
             function doNothing() {}
             google.maps.event.addDomListener(window, 'load', load);
             </script>
+</head>
 
+<body>
+    <!--Header-->
+    <?php
+    require_once("dbcontroller.php");
+    $db_handle = new DBController();
+    $query ="SELECT * FROM ratings";
+    $result = $db_handle->runQuery($query);
+?>
+    <header id="header" class="alt">
+    <div id='navmenu'>
+        <ul>
+            <li ><a href='index.html'><span>Home</span></a></li>
+           <li ><a href='places.php'><span>Places</span></a>
+           <ul>
+               <li><a href='places.php'><span>Clubs/Pubs</span></a></li>
+               <li><a href='places.php'><span>Food</span></a></li>
+              <li> <a href='places.php'><span>Outdor</span></a></li>
+              <li> <a href='places.php'><span>Culture/Parks</span></a></li>
+           </ul>
+           </li>
+           <li><a href='index.html'><span>About</span></a></li>
+           <li><a href='index.html'><span>Contact</span></a></li>
+           <li class='last'><a href='login.php'><span>Login</span></a></li>
+        </ul>
+    </div>
+</header>
+<!--Banner-->
+            <section id="mapsbanner">
+            <div id="map"></div>
+
+            <div id="buttonwrapper" >
+            <ul>
+            <li><button class="mapbutton" type="button"  onclick="toggleGroup('Heidis')  "><img src="img/23.jpg" ><h2>Heidis</h2><h3>20:00 - 02:00</h3></button></li>
+            <li><button class="mapbutton" type="button" onclick="toggleGroup('AustralianBar')" ><img src="img/23.jpg" ><h2>Australian Bar</h2><h3>20:00 - 05:00</h3></button></button></li>
+            <li><button class="mapbutton" type="button"  onclick="toggleGroup('AirPub')" > <img src="img/23.jpg" ><h2>Air Pub</h2><h3>20:00 - 12:00</h3></button></li>
+            <li><button class="mapbutton" type="button"  onclick="toggleGroup('LaBar')" > <img src="img/23.jpg" ><h2>La Bar</h2><h3>20:00 - 06:00</h3></button></li>
+            <li><button class="mapbutton" type="button"  onclick="toggleGroup('OldIrish')" > <img src="img/23.jpg" ><h2>Old Irish Pub</h2><h3>5:00 - 02:00</h3></button></li>
+            <li><button class="mapbutton" type="button"  onclick="toggleGroup('Gap')" > <img src="img/23.jpg" ><h2>The Gap</h2><h3>20:00 - 04:00</h3></button></li>
+          
+            </ul>
+            </div>
+
+            
+            </section>
+
+
+    <!--categories-->
+
+
+
+    <div id="feat">
+
+        <ul>
+           
+             <?php
+                    if(!empty($result)) {
+                        $i=0;
+                        foreach ($result as $place) {
+                ?>
+            <div class="figure box">
+                <li>
+                    <a href="#"><img src="img/23.jpg"></a>
+                </li>
+                <p>
+                    <h3 class="feed_title"><?php echo $place["title"]; ?></h3>
+                    
+                    <div id="stars-<?php echo $place["id"]; ?>">
+                            <input name="rating" id="rating" value="<?php echo $place["rating"]; ?>" />
+                            <ul onMouseOut="resetRating(<?php echo $place["id"]; ?>);">
+                              <?php
+                              for($i=1;$i<=5;$i++) {
+                                  $selected = "";
+                                  if(!empty($place["rating"]) && $i<=$place["rating"]) {
+                                    $selected = "selected";
+                                  }
+                              ?>
+                              <li class='<?php echo $selected; ?>' onmouseover="highlightStar(this,<?php echo $place["id"]; ?>);" onmouseout="removeHighlight(<?php echo $place["id"]; ?>);" onClick="addRating(this,<?php echo $place["id"]; ?>);">&#9733; 
+                              </li>  
+                              <?php }  ?>
+                              <?php echo $place["reviews"]; ?> reviews
+                            </ul>
+                    </div>
+                        
+                    
+                    <p><?php echo $place["description"]; ?></p>
+                </p>
+            </div>
+                            <?php       
+                    }
+                    }
+                ?>
+
+        </ul>
+    </div>
+
+
+
+    <!--see more-->
+
+    <div class="button-wrapper">
+        <a class="button cta-button" href="#">seemore</a>
+    </div>
+
+
+
+    <!--footer-->
+    <footer class="footer">
+
+        <p class="content">Bad decisions make better stories</p>
+
+        <p class="footer-links">
+            <a href="places.php">Places</a> ·
+            <a href="index.html">About</a> ·
+            <a href="index.html">Contact</a> ·
+            <a href="index.html">Login</a>
+        </p>
+        <p class="copy">RBGK &copy; 2015</p>
+    </footer>
 </body>
 
 </html>
